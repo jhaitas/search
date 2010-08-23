@@ -1,6 +1,8 @@
 import pygame
 from pygame.locals import *
 import math
+import random
+import datetime
 
 def updateDisplay():
 	pygame.display.flip()
@@ -12,11 +14,11 @@ def wait(time):
 	pygame.time.wait(time)
 
 def draw_cross(eccentricity,angle,color=None):
+        if color==None:
+                color=fgColor
 	
         centerX,centerY = myDisp.returnPhysCoords(eccentricity,angle)
         size = eccentricity / 10.0
-	if color==None:
-		color=fgColor
 
 	hx1 = centerX - (size / 2.0)
         hy1 = centerY
@@ -33,7 +35,6 @@ def draw_cross(eccentricity,angle,color=None):
 
         pygame.draw.rect(screen,color,rect1)
         pygame.draw.rect(screen,color,rect2)
-
 
 def draw_l(eccentricity,angle):
 	centerX,centerY = myDisp.returnPhysCoords(eccentricity,angle)
@@ -73,11 +74,60 @@ def draw_t(eccentricity,angle):
 	vx2 = centerX                + lineThickness / 2.0
 	vy2 = centerY - (size / 2.0)
 
+	print "(hx2-hx1,hy2-hy1) = ",(hx2-hx1,hy2-hy1)
+	print "(vx2-vx1,vy2-vy1) = ",(vx2-vx1,vy2-vy1)
+	
+#	print "myDisp.phys2pix((hx1, hy1))        = ",myDisp.phys2pix((hx1, hy1))
+#	print "myDisp.phys2pix((hx2-hx1,hy2-hy1)) = ",myDisp.phys2pix((hx2-hx1,hy2-hy1))
+#	print "myDisp.phys2pix((vx1, vy1))        = ",myDisp.phys2pix((vx1, vy1))
+#	print "myDisp.phys2pix((vx2-vx1,vy2-vy1)) = ",myDisp.phys2pix((vx2-vx1,vy2-vy1))
+
+
         rect1 = pygame.Rect(myDisp.phys2pix((hx1, hy1)),myDisp.phys2pix((hx2-hx1,hy2-hy1)))
         rect2 = pygame.Rect(myDisp.phys2pix((vx1, vy1)),myDisp.phys2pix((vx2-vx1,vy2-vy1)))
 
 	pygame.draw.rect(screen,color,rect1)
 	pygame.draw.rect(screen,color,rect2)
+
+def draw_test_markers():
+	thisEccentricity = 6.0
+	thisAngle = 0.0
+	while (thisEccentricity <= 10.0):
+		thisAngle = 0.0
+		while (thisAngle < 360.0):
+			draw_cross(thisEccentricity,thisAngle)
+			updateDisplay()
+			wait(250)
+			thisAngle += 45.0
+		thisEccentricity += 2.0
+
+def draw_array(thisEccentricity):
+	trialsRunning = True
+	totalTrials = 10
+	trialCount = 0
+	while (trialsRunning):
+		totalTrials = 10
+		thisTarget = random.randint(0,7)
+		thisAngle = 0.0
+
+		clearScreen()
+		updateDisplay()
+		wait(250)
+		i = 0
+		while (i < 8):
+			if (i == thisTarget):
+				draw_t(thisEccentricity,thisAngle)
+	#			draw_cross(thisEccentricity,thisAngle,(255,0,0))
+			else:
+				draw_l(thisEccentricity,thisAngle)
+	#			draw_cross(thisEccentricity,thisAngle,(255,0,0))
+			thisAngle += 45.0
+			i += 1
+		updateDisplay()
+		wait(2000)	
+		trialCount += 1
+		if (trialCount > totalTrials):
+			trialsRunning = False
 
 class PhysicalDisplay:
 
@@ -124,3 +174,6 @@ screenSizeY = modes[0][1]
 
 screenCenterX = screenSizeX / 2.0
 screenCenterY = screenSizeY / 2.0
+
+
+random.seed(datetime.datetime.microsecond)
