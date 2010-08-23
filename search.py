@@ -26,9 +26,9 @@ def draw_cross(eccentricity,angle,color=None):
         hy2 = centerY
 
         vx1 = centerX
-        vy1 = centerY + (size / 2.0)
+        vy1 = centerY - (size / 2.0)
         vx2 = centerX
-        vy2 = centerY - (size / 2.0)
+        vy2 = centerY + (size / 2.0)
 
         rect1 = pygame.Rect(myDisp.phys2pix((hx1, hy1)),myDisp.phys2pix((hx2-hx1,hy2-hy1)))
         rect2 = pygame.Rect(myDisp.phys2pix((vx1, vy1)),myDisp.phys2pix((vx2-vx1,vy2-vy1)))
@@ -48,9 +48,9 @@ def draw_l(eccentricity,angle):
 	hy2 = centerY + (size / 2.0) - lineThickness
 
 	vx1 = centerX - (size / 2.0)
-	vy1 = centerY + (size / 2.0)
+	vy1 = centerY - (size / 2.0)
 	vx2 = centerX - (size / 2.0) + lineThickness
-	vy2 = centerY - (size / 2.0)
+	vy2 = centerY + (size / 2.0)
 
 	rect1 = pygame.Rect(myDisp.phys2pix((hx1, hy1)),myDisp.phys2pix((hx2-hx1,hy2-hy1)))
 	rect2 = pygame.Rect(myDisp.phys2pix((vx1, vy1)),myDisp.phys2pix((vx2-vx1,vy2-vy1)))
@@ -70,18 +70,9 @@ def draw_t(eccentricity,angle):
 	hy2 = centerY - (size / 2.0) 
 
 	vx1 = centerX                - lineThickness / 2.0
-	vy1 = centerY + (size / 2.0)
+	vy1 = centerY - (size / 2.0)
 	vx2 = centerX                + lineThickness / 2.0
-	vy2 = centerY - (size / 2.0)
-
-	print "(hx2-hx1,hy2-hy1) = ",(hx2-hx1,hy2-hy1)
-	print "(vx2-vx1,vy2-vy1) = ",(vx2-vx1,vy2-vy1)
-	
-#	print "myDisp.phys2pix((hx1, hy1))        = ",myDisp.phys2pix((hx1, hy1))
-#	print "myDisp.phys2pix((hx2-hx1,hy2-hy1)) = ",myDisp.phys2pix((hx2-hx1,hy2-hy1))
-#	print "myDisp.phys2pix((vx1, vy1))        = ",myDisp.phys2pix((vx1, vy1))
-#	print "myDisp.phys2pix((vx2-vx1,vy2-vy1)) = ",myDisp.phys2pix((vx2-vx1,vy2-vy1))
-
+	vy2 = centerY + (size / 2.0)
 
         rect1 = pygame.Rect(myDisp.phys2pix((hx1, hy1)),myDisp.phys2pix((hx2-hx1,hy2-hy1)))
         rect2 = pygame.Rect(myDisp.phys2pix((vx1, vy1)),myDisp.phys2pix((vx2-vx1,vy2-vy1)))
@@ -166,8 +157,12 @@ fgColor = (255,255,255)
 
 MacBookDiag = 13.3      
 MacBookAspect = (16,10) 
-                
-myDisp = PhysicalDisplay(MacBookDiag * 2.54,MacBookAspect,modes[0])
+
+CinemaDisplay23Diag = 23
+CinemaDisplay23Aspect = (16,10)
+
+#myDisp = PhysicalDisplay(MacBookDiag * 2.54,MacBookAspect,modes[0])
+myDisp = PhysicalDisplay(CinemaDisplay23Diag * 2.54,CinemaDisplay23Aspect,modes[0])
 
 screenSizeX = modes[0][0]
 screenSizeY = modes[0][1]
