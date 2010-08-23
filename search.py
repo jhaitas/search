@@ -11,10 +11,13 @@ def clearScreen():
 def wait(time):
 	pygame.time.wait(time)
 
-def draw_cross(eccentricity,angle):
+def draw_cross(eccentricity,angle,color=None):
+	
         centerX,centerY = myDisp.returnPhysCoords(eccentricity,angle)
         size = eccentricity / 10.0
-	color = fgColor
+	if color==None:
+		color=fgColor
+
 	hx1 = centerX - (size / 2.0)
         hy1 = centerY
         hx2 = centerX + (size / 2.0)
@@ -37,6 +40,7 @@ def draw_l(eccentricity,angle):
 	size = eccentricity / 10.0
 	lineThickness = size * 0.2
 	color = fgColor
+
 	hx1 = centerX - (size / 2.0)
 	hy1 = centerY + (size / 2.0)
 	hx2 = centerX + (size / 2.0)
@@ -58,6 +62,7 @@ def draw_t(eccentricity,angle):
         size = eccentricity / 10.0
 	color = fgColor
 	lineThickness = size * 0.2
+
 	hx1 = centerX - (size / 2.0)
 	hy1 = centerY - (size / 2.0) + lineThickness
 	hx2 = centerX + (size / 2.0)
