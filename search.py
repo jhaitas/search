@@ -149,7 +149,7 @@ class PhysicalDisplay:
 
 pygame.init()
 modes = pygame.display.list_modes();
-screen = pygame.display.set_mode(modes[0], (FULLSCREEN | DOUBLEBUF | HWSURFACE))
+screen = pygame.display.set_mode(modes[0], (FULLSCREEN | HWSURFACE))
 pygame.mouse.set_visible(0)
 
 bgColor = (0,0,0)
